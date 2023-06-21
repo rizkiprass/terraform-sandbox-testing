@@ -9,8 +9,8 @@ module "vpc" {
   dhcp_options_domain_name_servers = ["AmazonProvidedDNS"]
   azs                              = ["${var.region}a", "${var.region}b"]
   public_subnets                   = [var.Public_Subnet_AZA_1, var.Public_Subnet_AZB_1, var.Public_Subnet_AZA_2, var.Public_Subnet_AZB_2]
-#  private_subnets                  = [var.Public_Subnet_AZA_2, var.Public_Subnet_AZB_2]
-  database_subnets                 = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2]
+  private_subnets                  = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2]
+#  database_subnets                 = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2]
   # Nat Gateway
   enable_nat_gateway = true
   single_nat_gateway = true #if true, nat gateway only create one
@@ -20,6 +20,7 @@ module "vpc" {
   public_subnet_suffix   = "public"
   private_subnet_suffix  = "private"
   intra_subnet_suffix = "db"
+  database_subnet_suffix = "db"
   #  intra_subnet_suffix   = "data"
 
   #  # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
