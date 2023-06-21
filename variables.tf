@@ -27,17 +27,28 @@ variable "cidr2" {
   default = "30.1.0.0/16"
 }
 
-variable "Public_Subnet_AZ1" {
+variable "Public_Subnet_AZA_1" {
   default = "30.0.0.0/24"
 }
+variable "Public_Subnet_AZA_2" {
+  default = "30.0.1.0/24"
+}
+
+variable "Public_Subnet_AZB_1" {
+  default = "30.0.2.0/24"
+}
+
+variable "Public_Subnet_AZB_2" {
+  default = "30.0.3.0/24"
+}
+
+
+
 
 variable "Public_Subnet_AZ1_2" {
   default = "30.1.0.0/24"
 }
 
-variable "Public_Subnet_AZ2" {
-  default = "30.0.1.0/24"
-}
 
 variable "Public_Subnet_AZ2_2" {
   default = "30.1.1.0/24"
