@@ -86,6 +86,6 @@ resource "aws_route_table" "data-rt" {
 }
 
 resource "aws_route_table_association" "rt-subnet-assoc-data-3a" {
-  subnet_id      = aws_subnet.subnet-db-1a
-  route_table_id = aws_route_table.data-rt
+  subnet_id      = aws_subnet.subnet-db-1a.id
+  route_table_id = aws_route_table.data-rt.id
 }
