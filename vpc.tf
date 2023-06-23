@@ -9,8 +9,8 @@ module "vpc" {
   dhcp_options_domain_name_servers = ["AmazonProvidedDNS"]
   azs                              = ["${var.region}a", "${var.region}b"]
   public_subnets                   = [var.Public_Subnet_AZA_1, var.Public_Subnet_AZB_2]
-  private_subnets                  = [var.App_Subnet_AZ1, var.App_Subnet_AZ2]
-  intra_subnets                    = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2] //this is db subnet
+  private_subnets                  = [var.App_Subnet_AZA, var.App_Subnet_AZB]
+  # intra_subnets                    = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2] //this is subnet only route to local vpc
   # Nat Gateway
   enable_nat_gateway = true
   single_nat_gateway = true #if true, nat gateway only create one
@@ -61,15 +61,17 @@ resource "aws_eip" "eip-nat-sandbox" {
 #}
 
 #
+
+//Create a db subnet with routing to nat
 resource "aws_subnet" "subnet-db-1a" {
   vpc_id            = module.vpc.vpc_id
-  cidr_block        = var.Public_Subnet_AZ1_2
+  cidr_block        = var.Data_Subnet_AZA
   availability_zone = format("%sa", var.aws_region)
 }
 
 resource "aws_subnet" "subnet-db-1b" {
   vpc_id            = module.vpc.vpc_id
-  cidr_block        = var.Public_Subnet_AZ2_2
+  cidr_block        = var.Data_Subnet_AZB
   availability_zone = format("%sb", var.aws_region)
 }
 
