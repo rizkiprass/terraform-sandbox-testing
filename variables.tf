@@ -42,32 +42,19 @@ variable "Public_Subnet_AZB_2" {
   default = "30.0.3.0/24"
 }
 
-
-
-
-variable "Public_Subnet_AZ1_2" {
-  default = "30.1.0.0/24"
-}
-
-
-variable "Public_Subnet_AZ2_2" {
-  default = "30.1.1.0/24"
-}
-
-
-variable "App_Subnet_AZ1" {
+variable "App_Subnet_AZA" {
   default = "30.0.10.0/24"
 }
 
-variable "App_Subnet_AZ2" {
+variable "App_Subnet_AZB" {
   default = "30.0.11.0/24"
 }
 
-variable "Data_Subnet_AZ1" {
+variable "Data_Subnet_AZA" {
   default = "30.0.20.0/24"
 }
 
-variable "Data_Subnet_AZ2" {
+variable "Data_Subnet_AZB" {
   default = "30.0.21.0/24"
 }
 
