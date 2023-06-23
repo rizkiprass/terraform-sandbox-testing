@@ -8,7 +8,7 @@ module "vpc" {
   enable_dhcp_options              = true
   dhcp_options_domain_name_servers = ["AmazonProvidedDNS"]
   azs                              = ["${var.region}a", "${var.region}b"]
-  public_subnets                   = [var.Public_Subnet_AZ1, var.Public_Subnet_AZ2]
+  public_subnets                   = [var.Public_Subnet_AZA_1, var.Public_Subnet_AZB_2]
   private_subnets                  = [var.App_Subnet_AZ1, var.App_Subnet_AZ2]
   intra_subnets                    = [var.Data_Subnet_AZ1, var.Data_Subnet_AZ2]
   database_subnets                 = [var.Public_Subnet_AZ1_2, var.Public_Subnet_AZ2_2]
