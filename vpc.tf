@@ -21,7 +21,7 @@ module "vpc" {
   private_subnet_suffix = "private"
   intra_subnet_suffix   = "db"
   #  intra_subnet_suffix   = "data"
-
+  tags = local.common_tags
   #  # VPC Flow Logs (Cloudwatch log group and IAM role will be created)
   #  enable_flow_log                      = true
   #  create_flow_log_cloudwatch_log_group = true
@@ -29,7 +29,7 @@ module "vpc" {
   #  flow_log_max_aggregation_interval    = 60
   #  flow_log_cloudwatch_log_group_kms_key_id = module.kms-cwatch-flowlogs-kms.key_arn
 
-  tags = local.common_tags
+
 
   #  //tags for vpc flow logs
   #  vpc_flow_log_tags = {
@@ -41,7 +41,7 @@ module "vpc" {
 resource "aws_eip" "eip-nat-sandbox" {
   vpc = true
   tags = merge(local.common_tags, {
-    Name = format("%s-production-EIP", var.project)
+    Name = format("%s-prod-EIP", var.project)
   })
 }
 
