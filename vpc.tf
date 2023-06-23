@@ -61,14 +61,6 @@ resource "aws_eip" "eip-nat-sandbox" {
 #  })
 #}
 
-resource "aws_eip" "eip-bastion" {
-  vpc      = true
-  instance = aws_instance.bastion.id
-  tags = merge(local.common_tags, {
-    Name = format("%s-production-EIP-bastion", var.project)
-  })
-}
-
 #
 #resource "aws_subnet" "subnet-db-1a" {
 # vpc_id      = module.vpc.vpc_id
