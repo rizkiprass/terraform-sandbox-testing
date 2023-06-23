@@ -77,7 +77,7 @@ resource "aws_route_table" "data-rt" {
   vpc_id = module.vpc.vpc_id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = module.vpc.natgw_ids
+    gateway_id = module.vpc.natgw_ids[0]
   }
 
   tags = merge(local.common_tags, {
