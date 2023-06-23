@@ -63,13 +63,13 @@ resource "aws_eip" "eip-nat-sandbox" {
 #
 resource "aws_subnet" "subnet-db-1a" {
   vpc_id            = module.vpc.vpc_id
-  cidr_block        = var.Private_Intra_AZ1
+  cidr_block        = var.Public_Subnet_AZ1_2
   availability_zone = format("%sa", var.aws_region)
 }
 
 resource "aws_subnet" "subnet-db-1b" {
   vpc_id            = module.vpc.vpc_id
-  cidr_block        = var.Private_Intra_AZ2
+  cidr_block        = var.Public_Subnet_AZ2_2
   availability_zone = format("%sb", var.aws_region)
 }
 
