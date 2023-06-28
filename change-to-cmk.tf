@@ -1,6 +1,6 @@
 resource "aws_ami_copy" "test" {
   name              = aws_ami_from_instance.example.name
-  description       = "A copy of ami-${aws_ami_from_instance.example.id}"
+  description       = "A copy of ami-${aws_ami_from_instance.example.id}-cmk"
   source_ami_id     = aws_ami_from_instance.example.id
   source_ami_region = "us-west-2"
   encrypted = "true"
