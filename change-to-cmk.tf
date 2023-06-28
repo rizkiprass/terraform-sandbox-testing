@@ -7,7 +7,7 @@ resource "aws_ami_copy" "test" {
   kms_key_id = "arn:aws:kms:us-west-2:272547513321:key/2b4ec77f-9419-4d5b-83a3-1b1eef55605a"
 
   tags = {
-    Name = "ami-name"
+    Name = "${aws_ami_from_instance.example.name}-CMK"
   }
 
   depends_on = [aws_ami_from_instance.example]
