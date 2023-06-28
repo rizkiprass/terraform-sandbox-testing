@@ -12,3 +12,7 @@ resource "aws_ami_copy" "test" {
 
   depends_on = [aws_ami_from_instance.example]
 }
+
+output "ami_id" {
+  value = aws_ami_copy.test.id
+}
