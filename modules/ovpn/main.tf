@@ -15,27 +15,10 @@ resource "aws_instance" "openvpn" {
   user_data              = <<EOF
 #!/bin/bash
 
-# Update the system's package lists
-apt update
-
-# Install OpenVPN Access Server dependencies
-apt -y install wget
-
-# Download OpenVPN Access Server
-wget https://swupdate.openvpn.net/as/openvpn-as-2.8.8-Ubuntu20.amd_64.deb
-
-# Install OpenVPN Access Server
-dpkg -i openvpn-as-2.8.8-Ubuntu20.amd_64.deb
-
-# Start OpenVPN Access Server service
-systemctl start openvpnas
-
-# Enable OpenVPN Access Server to start on boot
-systemctl enable openvpnas
-
-# Save the initial administrator password
-initial_password=$(cat /usr/local/openvpn_as/etc/initial_pwd)
-echo "$initial_password" > /home/ubuntu/openvpn_password.txt
+apt update && apt -y install ca-certificates wget net-tools gnupg
+wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
+echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
+apt update && apt -y install openvpn-as | grep -oP 'To login please use the "openvpn" account with "[^"]+" password.' > /home/ubuntu/login-user-pass.txt
 EOF
 
   metadata_options {
