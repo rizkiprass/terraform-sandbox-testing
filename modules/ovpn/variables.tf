@@ -54,7 +54,7 @@ variable "vpc_id" {
 variable "create_vpc_security_group_ids" {
   description = "Determines whether an SG is created or to use an existing SG"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "subnet_id" {

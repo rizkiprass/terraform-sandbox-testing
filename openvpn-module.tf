@@ -13,7 +13,7 @@ module "ovpn_instance" {
   key_name                      = "pras-key-2"
   #monitoring                    = true   //todo optional argument
   #vpc_security_group_ids        = ""     //todo optional argument (custom)
-  create_vpc_security_group_ids = "true" //if you want use existing SG, change to false then add an "vpc_security_group_ids" argument. Check the /.terraform/example for more information
+  #create_vpc_security_group_ids = "false" //if you want use existing SG, change to false then add an "vpc_security_group_ids" argument. Check the /.terraform/example for more information
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
   vpc_id                        = "vpc-044dd042a5f048a3e"
   subnet_id                     = "subnet-040984d3d48d92f1f"
