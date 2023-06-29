@@ -8,8 +8,8 @@ module "ovpn_instance" {
   name = local.openvpn_name
 
   instance_type                 = "t3.micro"
-  ami_custom = ""
-  ami                           = false //todo optional argument (custom) // set to false if you want to use custom AMI then add a "ami_custom" argument
+  #ami_custom = ""
+  #ami                           = false //todo optional argument (custom) // set to false if you want to use custom AMI then add a "ami_custom" argument
   key_name                      = "pras-key-2"
   #monitoring                    = true   //todo optional argument
   #vpc_security_group_ids        = ""     //todo optional argument (custom)
