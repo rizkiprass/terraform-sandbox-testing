@@ -12,7 +12,31 @@ resource "aws_instance" "openvpn" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = var.create_vpc_security_group_ids ? aws_security_group.this[0].id : var.vpc_security_group_ids
   iam_instance_profile   = var.iam_instance_profile
-  user_data              = file("open-vpn.sh")
+  user_data              = <<EOF
+#!/bin/bash
+
+# Update the system's package lists
+apt update
+
+# Install OpenVPN Access Server dependencies
+apt -y install wget
+
+# Download OpenVPN Access Server
+wget https://swupdate.openvpn.net/as/openvpn-as-2.8.8-Ubuntu20.amd_64.deb
+
+# Install OpenVPN Access Server
+dpkg -i openvpn-as-2.8.8-Ubuntu20.amd_64.deb
+
+# Start OpenVPN Access Server service
+systemctl start openvpnas
+
+# Enable OpenVPN Access Server to start on boot
+systemctl enable openvpnas
+
+# Save the initial administrator password
+initial_password=$(cat /usr/local/openvpn_as/etc/initial_pwd)
+echo "$initial_password" > /home/ubuntu/openvpn_password.txt
+EOF
 
   metadata_options {
     http_endpoint = "enabled"
@@ -44,7 +68,7 @@ resource "aws_instance" "openvpn" {
 resource "aws_eip" "eipovpn" {
   instance = aws_instance.openvpn.id
   vpc      = true
-  tags = { "Name" = "${var.name}-EIP" }
+  tags     = { "Name" = "${var.name}-EIP" }
 }
 
 ################################################################################
