@@ -35,7 +35,7 @@ EOF
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = merge({ "Name" = var.name }, var.tags)
