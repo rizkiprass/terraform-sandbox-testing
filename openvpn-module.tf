@@ -15,8 +15,8 @@ module "ovpn_instance" {
   #vpc_security_group_ids        = ""     //todo optional argument (custom)
   #create_vpc_security_group_ids = "false" //if you want use existing SG, change to false then add an "vpc_security_group_ids" argument. Check the /.terraform/example for more information
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
-  vpc_id                        = "vpc-03f2c297f4d834936"
-  subnet_id                     = "subnet-0d90013451437020e	"
+  vpc_id                        = "vpc-06409c7d1459a1aae"
+  subnet_id                     = "subnet-057874b9829745a19"
 
   tags = merge(local.common_tags, {
     OS     = "Ubuntu",
