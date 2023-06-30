@@ -10,7 +10,7 @@ module "ovpn_instance" {
   instance_type                 = "t3.micro"
   #ami_custom = ""
   #ami                           = false //todo optional argument (custom) // set to false if you want to use custom AMI then add a "ami_custom" argument
-  key_name                      = "pras-key-2"
+  key_name                      = "sandbox-key-2"
   #monitoring                    = true   //todo optional argument
   #vpc_security_group_ids        = ""     //todo optional argument (custom)
   #create_vpc_security_group_ids = "false" //if you want use existing SG, change to false then add an "vpc_security_group_ids" argument. Check the /.terraform/example for more information

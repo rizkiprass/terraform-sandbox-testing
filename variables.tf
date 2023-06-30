@@ -11,6 +11,9 @@ variable "access_key_2" {}
 
 variable "secret_key_2" {}
 
+variable "access_key_3" {}
+variable "secret_key_3" {}
+
 // Tag
 variable "Birthday" {
   default = "26-01-2022"

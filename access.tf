@@ -6,8 +6,8 @@
 
 provider "aws" {
   region     = var.aws_region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  access_key = var.access_key_3
+  secret_key = var.secret_key_3
 }
 
 #terraform {
@@ -29,3 +29,14 @@ provider "aws" {
     secret_key = var.secret_key_2
     region = "us-east-1"
   }
+
+terraform {
+  cloud {
+    hostname = "app.terraform.io" # Optional for TFC
+    organization = "pras"
+
+    workspaces {
+      name = "terraform-sandbox-testing"
+    }
+  }
+}
