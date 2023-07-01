@@ -9,16 +9,12 @@ resource "aws_instance" "web" {
     })
   }
 
-#  ebs_block_device {
-#    device_name           = "/dev/sdb"
-#    volume_size           = 900
-#    volume_type           = "st1"
-#    encrypted             = true
-#    delete_on_termination = false
-#    tags = merge(local.common_tags, {
-#      Name = "test-ebs"
-#    })
-#  }
+  ebs_block_device {
+    device_name           = "/dev/sdb"
+    tags = merge(local.common_tags, {
+      Name = "test-ebs-block"
+    })
+  }
 
   tags = {
     Name = "HelloWorld"
