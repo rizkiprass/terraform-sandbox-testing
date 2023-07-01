@@ -6,8 +6,8 @@
 
 provider "aws" {
   region     = var.aws_region
-  access_key = var.access_key_3
-  secret_key = var.secret_key_3
+  access_key = var.access_key
+  secret_key = var.secret_key
 }
 
 #terraform {
