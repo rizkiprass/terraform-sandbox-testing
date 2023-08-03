@@ -1,21 +1,21 @@
 variable "aws_region" {
   description = "AWS Region"
-  default     = "us-west-2"
+  default     = "eu-west-2"
 }
 
 variable "access_key" {}
 
 variable "secret_key" {}
 
-variable "access_key_2" {}
-
-variable "secret_key_2" {}
-
-variable "access_key_3" {}
-variable "secret_key_3" {}
+#variable "access_key_2" {}
+#
+#variable "secret_key_2" {}
+#
+#variable "access_key_3" {}
+#variable "secret_key_3" {}
 
 variable "region" {
-  default = "us-west-2"
+  default = "eu-west-2"
 }
 
 // Tag
