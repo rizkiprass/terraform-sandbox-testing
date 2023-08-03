@@ -1,7 +1,7 @@
 resource "aws_instance" "web-app" {
   ami                         = data.aws_ami.ubuntu_20.id
   instance_type               = "t3.micro"
-  associate_public_ip_address = "false"
+  associate_public_ip_address = "true"
   key_name                    = "pras-vivo-key"
   subnet_id                   = module.vpc.public_subnets[0]
 #  iam_instance_profile        = aws_iam_instance_profile.ssm-profile.name
