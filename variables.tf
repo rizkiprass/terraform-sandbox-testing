@@ -85,7 +85,7 @@ variable "environment_dev" {
   default = "dev"
 }
 variable "project" {
-  default = "sandbox"
+  default = "pras"
 }
 
 locals {
@@ -103,7 +103,7 @@ locals {
 }
 
 variable "customer" {
-  default = "sandbox"
+  default = "pras"
 }
 
 #key
