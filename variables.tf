@@ -14,6 +14,10 @@ variable "secret_key_2" {}
 variable "access_key_3" {}
 variable "secret_key_3" {}
 
+variable "region" {
+  default = "us-west-2"
+}
+
 // Tag
 variable "Birthday" {
   default = "26-01-2022"
