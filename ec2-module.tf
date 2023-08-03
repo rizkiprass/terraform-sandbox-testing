@@ -26,9 +26,9 @@ locals {
       subnet_id         = element(module.vpc.private_subnets, 0)
       root_block_device = [
         {
-          encrypted   = true
-          volume_type = "gp3"
-          volume_size = 50
+          encrypted             = true
+          volume_type           = "gp3"
+          volume_size           = 50
           delete_on_termination = true
         }
       ]
@@ -39,9 +39,9 @@ locals {
       subnet_id         = element(module.vpc.private_subnets, 1)
       root_block_device = [
         {
-          encrypted   = true
-          volume_type = "gp3"
-          volume_size = 50
+          encrypted             = true
+          volume_type           = "gp3"
+          volume_size           = 50
           delete_on_termination = true
         }
       ]
@@ -52,9 +52,9 @@ locals {
       subnet_id         = element(module.vpc.private_subnets, 1)
       root_block_device = [
         {
-          encrypted   = true
-          volume_type = "gp3"
-          volume_size = 50
+          encrypted             = true
+          volume_type           = "gp3"
+          volume_size           = 50
           delete_on_termination = true
         }
       ]
@@ -67,17 +67,19 @@ module "ec2_multiple" {
 
   for_each = local.multiple_instances
 
-  name = "test-multi-${each.key}"
+  name = "pras-multi-${each.key}"
 
-  instance_type          = each.value.instance_type
-  availability_zone      = each.value.availability_zone
-  subnet_id              = each.value.subnet_id
+  instance_type     = each.value.instance_type
+  availability_zone = each.value.availability_zone
+  subnet_id         = each.value.subnet_id
+  key_name          = "pras-vivo-key"
+
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
   enable_volume_tags = true
   root_block_device  = lookup(each.value, "root_block_device", [])
 
   tags = merge(local.common_tags, {
-    Backup              = "DailyBackup" # TODO: Set Backup Rules
+    Backup = "DailyBackup" # TODO: Set Backup Rules
   })
 }
