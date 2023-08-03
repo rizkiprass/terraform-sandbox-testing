@@ -49,7 +49,7 @@ locals {
     managed-node-2 = {
       instance_type     = "t3.micro"
       availability_zone = element(module.vpc.azs, 1)
-      subnet_id         = element(module.vpc.private_subnets, 0)
+      subnet_id         = element(module.vpc.private_subnets, 1)
       root_block_device = [
         {
           encrypted   = true
