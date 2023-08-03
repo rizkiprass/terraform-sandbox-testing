@@ -1,6 +1,8 @@
 resource "aws_instance" "web" {
-  ami           = "ami-01e14db03a359ff18"
+  ami           = data.aws_ami.ubuntu_20.id
   instance_type = "t3.micro"
+  key_name      = "pras-vivo-key"
+
 
   root_block_device {
 
@@ -10,7 +12,7 @@ resource "aws_instance" "web" {
   }
 
   ebs_block_device {
-    device_name           = "/dev/sdb"
+    device_name = "/dev/sdb"
     tags = merge(local.common_tags, {
       Name = "test-ebs-block"
     })
