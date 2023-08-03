@@ -22,7 +22,7 @@ resource "aws_instance" "web-app" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = merge(local.common_tags, {
