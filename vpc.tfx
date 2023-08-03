@@ -67,12 +67,22 @@ resource "aws_subnet" "subnet-db-1a" {
   vpc_id            = module.vpc.vpc_id
   cidr_block        = var.Data_Subnet_AZA
   availability_zone = format("%sa", var.aws_region)
+
+  tags = merge(local.common_tags,
+    {
+      Name = format("%s-%s-data-subnet-3a", var.customer, var.environment) //
+  })
 }
 
 resource "aws_subnet" "subnet-db-1b" {
   vpc_id            = module.vpc.vpc_id
   cidr_block        = var.Data_Subnet_AZB
   availability_zone = format("%sb", var.aws_region)
+
+  tags = merge(local.common_tags,
+    {
+      Name = format("%s-%s-data-subnet-3b", var.customer, var.environment) //
+  })
 }
 
 resource "aws_route_table" "data-rt" {

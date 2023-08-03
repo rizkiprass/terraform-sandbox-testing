@@ -7,6 +7,13 @@ variable "access_key" {}
 
 variable "secret_key" {}
 
+variable "access_key_2" {}
+
+variable "secret_key_2" {}
+
+variable "access_key_3" {}
+variable "secret_key_3" {}
+
 // Tag
 variable "Birthday" {
   default = "26-01-2022"
@@ -14,9 +21,6 @@ variable "Birthday" {
 
 variable "Backup" {
   default = "BackupDaily"
-}
-variable "region" {
-  default = "us-west-2"
 }
 
 variable "cidr" {
@@ -118,3 +122,4 @@ variable "key-sandbox-data" {
 variable "key-sandbox-openvpn" {
   default = "key-sandbox-openvpn"
 }
+

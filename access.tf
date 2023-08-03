@@ -20,3 +20,22 @@ provider "aws" {
 #    }
 #  }
 #}
+
+  provider "aws" {
+    alias = "dest"
+
+    access_key = var.access_key_2
+    secret_key = var.secret_key_2
+    region = "us-east-1"
+  }
+
+terraform {
+  cloud {
+    hostname = "app.terraform.io" # Optional for TFC
+    organization = "pras"
+
+    workspaces {
+      name = "terraform-sandbox-testing"
+    }
+  }
+}
