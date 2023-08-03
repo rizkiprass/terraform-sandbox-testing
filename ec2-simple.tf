@@ -4,7 +4,7 @@ resource "aws_instance" "web-app" {
   associate_public_ip_address = "false"
   key_name                    = "pras-vivo-key"
   subnet_id                   = module.vpc.public_subnets[0]
-  iam_instance_profile        = aws_iam_instance_profile.ssm-profile.name
+#  iam_instance_profile        = aws_iam_instance_profile.ssm-profile.name
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
