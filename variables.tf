@@ -3,6 +3,10 @@ variable "aws_region" {
   default     = "us-west-2"
 }
 
+variable "region" {
+  default = ""
+}
+
 variable "access_key" {}
 
 variable "secret_key" {}
