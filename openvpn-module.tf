@@ -8,7 +8,7 @@ module "ec2-openvpn" {
   vpc_id        = aws_vpc.vpc.id
   ec2_subnet_id = aws_subnet.public-subnet-3a.id
   user_openvpn  = "user-1"
-  routing_ip    = "172.31.0.0/16"
+  routing_ip    = "30.0.0.0/16"
 
   tags = merge(local.common_tags, {
     OS = "Ubuntu",
@@ -40,7 +40,7 @@ resource "aws_subnet" "public-subnet-3a" {
 
 resource "aws_subnet" "public-subnet-3b" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.Public_Subnet_AZ_B
+  cidr_block        = var.Public_Subnet_AZB_2
   availability_zone = format("%sb", var.region)
 
   tags = merge(local.common_tags, {
