@@ -1,20 +1,27 @@
 module "ec2-openvpn" {
-  source = "./modules/ec2-openvpn"
+  source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name          = "Openvpn Access Server"
-  create_ami    = true
+  name = "Openvpn Access Server"
+
   instance_type = "t3.micro"
   key_name      = ""
   vpc_id        = aws_vpc.vpc.id
   ec2_subnet_id = aws_subnet.public-subnet-3a.id
   user_openvpn  = "user-1"
-  routing_ip    = "30.0.0.0/16"
+  routing_ip    = "172.31.0.0/16"
 
   tags = merge(local.common_tags, {
     OS = "Ubuntu",
   })
 }
 
+################################################################################
+# Supporting Resources
+################################################################################
+
+###########################
+#Create VPC
+###########################
 resource "aws_vpc" "vpc" {
   cidr_block           = var.cidr
   instance_tenancy     = "default"
@@ -29,7 +36,7 @@ resource "aws_vpc" "vpc" {
 //Public Subnet
 resource "aws_subnet" "public-subnet-3a" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.Public_Subnet_AZA_1
+  cidr_block        = var.Public_Subnet_AZ_A
   availability_zone = format("%sa", var.region)
 
   tags = merge(local.common_tags,
@@ -40,7 +47,7 @@ resource "aws_subnet" "public-subnet-3a" {
 
 resource "aws_subnet" "public-subnet-3b" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.Public_Subnet_AZB_2
+  cidr_block        = var.Public_Subnet_AZ_B
   availability_zone = format("%sb", var.region)
 
   tags = merge(local.common_tags, {

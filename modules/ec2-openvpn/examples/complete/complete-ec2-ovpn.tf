@@ -1,20 +1,75 @@
 module "ec2-openvpn" {
-  source = "./modules/ec2-openvpn"
+  source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name          = "Openvpn Access Server"
-  create_ami    = true
-  instance_type = "t3.micro"
-  key_name      = ""
-  vpc_id        = aws_vpc.vpc.id
-  ec2_subnet_id = aws_subnet.public-subnet-3a.id
-  user_openvpn  = "user-1"
-  routing_ip    = "30.0.0.0/16"
+  name                          = "Openvpn Access Server"
+  create_ami                    = false
+  ami_id                        = "xxxxxx"
+  instance_type                 = "t3.micro"
+  key_name                      = ""
+  vpc_id                        = aws_vpc.vpc.id
+  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
+  user_openvpn                  = "user-1"
+  routing_ip                    = "172.31.0.0/16"
+  create_vpc_security_group_ids = false
+  vpc_security_group_ids        = ["xxxxx"]
+  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
 
   tags = merge(local.common_tags, {
     OS = "Ubuntu",
   })
 }
 
+################################################################################
+# Supporting Resources
+################################################################################
+
+###########################
+#Create Role ssm core role
+###########################
+
+resource "aws_iam_role" "ssm-core-role" {
+  name_prefix        = format("%s-ssm-core-role", var.project)
+  assume_role_policy = <<POLICY
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Action": "sts:AssumeRole",
+     "Principal": {
+       "Service": "ec2.amazonaws.com"
+     },
+     "Effect": "Allow",
+     "Sid": ""
+   }
+ ]
+}
+POLICY
+  tags = merge(local.common_tags, {
+    Name = format("%s-ssm-core-role", var.project)
+  })
+}
+
+#Attach Policy SSMCore
+resource "aws_iam_role_policy_attachment" "ssmcore-attach-ssmcore" {
+  role       = aws_iam_role.ssm-core-role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
+#Attach Policy CloudWatch
+resource "aws_iam_role_policy_attachment" "ssmcore-attach-cwatch" {
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.ssm-core-role.name
+}
+
+#Instance Profile ssm
+resource "aws_iam_instance_profile" "ssm-profile" {
+  name = format("%s-ssm-profile", var.project)
+  role = aws_iam_role.ssm-core-role.name
+}
+
+###########################
+#Create VPC
+###########################
 resource "aws_vpc" "vpc" {
   cidr_block           = var.cidr
   instance_tenancy     = "default"
@@ -29,7 +84,7 @@ resource "aws_vpc" "vpc" {
 //Public Subnet
 resource "aws_subnet" "public-subnet-3a" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.Public_Subnet_AZA_1
+  cidr_block        = var.Public_Subnet_AZ_A
   availability_zone = format("%sa", var.region)
 
   tags = merge(local.common_tags,
@@ -40,7 +95,7 @@ resource "aws_subnet" "public-subnet-3a" {
 
 resource "aws_subnet" "public-subnet-3b" {
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = var.Public_Subnet_AZB_2
+  cidr_block        = var.Public_Subnet_AZ_B
   availability_zone = format("%sb", var.region)
 
   tags = merge(local.common_tags, {

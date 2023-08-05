@@ -10,13 +10,13 @@ variable "tags" {
   default     = {}
 }
 
-variable "ami_custom" {
+variable "ami" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = string
   default     = null
 }
 
-variable "ami" {
+variable "create_ami" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = bool
   default     = true
@@ -57,8 +57,26 @@ variable "create_vpc_security_group_ids" {
   default     = true
 }
 
-variable "subnet_id" {
-  description = "The VPC Subnet ID to launch in"
+variable "ec2_subnet_id" {
+  description = "The place of subnet Openvpn-AS EC2"
   type        = string
   default     = null
+}
+
+variable "user_openvpn" {
+  description = "Additional username for login to Openvpn-AS"
+  type = string
+  default = null
+}
+
+variable "routing_ip" {
+  description = "The private subnets that your clients need to access. Use an IP CIDR range"
+  type = string
+  default = null
+}
+
+variable "ec2_public_ip" {
+  description = "Public IP Address of EC2 which VPN clients use to connect to the Access Server"
+  type = string
+  default = ""
 }
