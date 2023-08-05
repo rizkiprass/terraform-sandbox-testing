@@ -1,6 +1,6 @@
 variable "aws_region" {
   description = "AWS Region"
-  default     = "us-west-2"
+  default     = "eu-west-2"
 }
 
 variable "region" {
@@ -11,12 +11,16 @@ variable "access_key" {}
 
 variable "secret_key" {}
 
-variable "access_key_2" {}
+#variable "access_key_2" {}
+#
+#variable "secret_key_2" {}
+#
+#variable "access_key_3" {}
+#variable "secret_key_3" {}
 
-variable "secret_key_2" {}
-
-variable "access_key_3" {}
-variable "secret_key_3" {}
+variable "region" {
+  default = "eu-west-2"
+}
 
 // Tag
 variable "Birthday" {
@@ -85,7 +89,7 @@ variable "environment_dev" {
   default = "dev"
 }
 variable "project" {
-  default = "sandbox"
+  default = "pras"
 }
 
 locals {
@@ -103,7 +107,7 @@ locals {
 }
 
 variable "customer" {
-  default = "sandbox"
+  default = "pras"
 }
 
 #key
